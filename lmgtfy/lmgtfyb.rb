@@ -30,5 +30,7 @@ replies do |tweet|
   
   full_response_tweet = "#{response_with_at_reply} #{feeling_lucky.uri}"
   
-  tweet full_response_tweet
+  reply full_response_tweet, tweet
+  
+  sleep 1
 end
