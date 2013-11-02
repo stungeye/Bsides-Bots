@@ -7,6 +7,8 @@ if days_until_bsides < 0
   exit
 end
 
+sleep 30
+
 require 'chatterbot/dsl'
 
 tweet_text = "@stungeye You are presenting @BSidesWpg "

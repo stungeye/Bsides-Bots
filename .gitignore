@@ -3,3 +3,4 @@
 
 # Config Files That Include Secret Tokens
 *.yml
+config.rb
