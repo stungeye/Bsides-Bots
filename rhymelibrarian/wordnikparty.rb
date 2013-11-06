@@ -1,6 +1,9 @@
 # encoding: UTF-8
 require 'httparty'
 
+# The official Wordnik API Ruby gem wasn't working for me,
+# so I built this HTTParty wrapper for finding rhymes.
+
 class WordnikParty
   include HTTParty
   

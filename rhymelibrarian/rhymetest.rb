@@ -9,7 +9,9 @@ sam_tweet = [
   'Ha! "Show me a dev who\'s not #causing an outage, and I\'ll show you a dev who\'s on vacation." #devops',
   "Also, am I right in thinking that Rails production environments should prefer gems over system packages, when both are available?",
   "Anybody have thoughts on CFEngine? Vs Puppet or Chef? / @stungeye",
-  "Huh. So with nary an objection, we're going with DevOps for our Discovery project...."
+  "Huh. So with nary an objection, we're going with DevOps for our Discovery project....",
+  "So far, puppet's taking it for me."
+  
 ]
 
 if File::exists?( "last_id.txt" )
@@ -35,13 +37,13 @@ sam_tweet.each do |tweet|
   possible_sentences = Set.new
   rhymes = wordnik.rhymes_with(last_word, 100)
   rhymes.each do |rhyme|
-    sentences = DB[:rhymesentences].where("lastword LIKE ?", "%"+rhyme).all
+    sentences = DB[:rhymesentences].where("lastword = ?", rhyme).all
     sentences.each {|sentence| possible_sentences << [sentence[:id], sentence[:words]] }
   end
   puts
   puts tweet
-  puts possible_sentences.inspect
   puts "\t" + possible_sentences.to_a.shuffle.first[1]  unless possible_sentences.size.zero?
+  puts "\t No Rhyme Found."  if possible_sentences.size.zero?  
   #possible_sentences.each do |sentence|
   #  puts "\t" + sentence
   #end

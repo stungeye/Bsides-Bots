@@ -22,12 +22,16 @@ timeline.each do |tweet|
   possible_sentences = Set.new
   rhymes = wordnik.rhymes_with(last_word, 100)
   rhymes.each do |rhyme|
-    sentences = DB[:rhymesentences].where("lastword LIKE ?", "%"+rhyme).where(:tweeted => false).all
+    puts rhyme
+    sentences = DB[:rhymesentences].where("lastword = ?", rhyme).where(:tweeted => false).all
     sentences.each {|sentence| possible_sentences << sentence[:words] }
   end
   puts
   puts tweet_text
-  possible_sentences.each do |sentence|
-    puts "\t" + sentence
-  end
+  puts "\t Last Word: #{last_word}"
+  puts "\t" + possible_sentences.to_a.shuffle.first  unless possible_sentences.size.zero?
+  puts "\t No rhyme found."  if possible_sentences.size.zero?
+  #possible_sentences.each do |sentence|
+  #  puts "\t" + sentence
+  #end
 end
