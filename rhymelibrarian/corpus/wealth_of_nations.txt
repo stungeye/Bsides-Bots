@@ -1,7 +1,3 @@
-Corpus length: 15845
-Accepted: 1944
-Rejected: 0
-ACCEPTED:
 Scarce any nation has dealt equally and impartially with every sort of industry.
 The fifth and last book treats of the revenue of the sovereign, or commonwealth.
 OF THE DIVISION OF LABOUR.
@@ -1939,7 +1935,6 @@ It is more convenient for the colonists to pay in tobacco than in gold and silve
 They are said, accordingly, to have less gold and silver money than any other colonies in America.
 They are reckoned, however, as thriving, and consequently as rich, as any of their neighbours.
 Their rents are remitted to them in sugar and rum, the produce of their estates.
-The new acquisitions of Grenada, Tobago, St.
 It might not, however, be necessary to remit any part of the American revenue in gold and silver.
 No oppressive aristocracy has ever prevailed in the colonies.
 The spirit of party prevails less in Scotland than in England.
