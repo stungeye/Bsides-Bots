@@ -5,10 +5,7 @@ def fixit(sentence)
     sentence = sentence[1,sentence.size-1]
     sentence.strip!
   end
-  sentence.capitalize!
-  if sentence.count('"').odd?
-    sentence += '"'
-  end
+  sentence[0] = sentence[0].upcase
   if sentence.count("(") > sentence.count(")")
     sentence += ")"
   end
@@ -19,7 +16,7 @@ end
 # are padding with extra spaces.
 
 corpus = ''
-open('communist_manifesto.txt', 'r:UTF-8') do |file|
+open('wealth_of_nations.txt', 'r:UTF-8') do |file|
   file.each do |line|
     corpus += line.strip + ' '
   end
@@ -36,9 +33,9 @@ rejected = []
 
 corpus.split('.').map{ |s| s.strip }.select{ |s| s.size > 0 }.each do |sentence|
   sentence += '.'
-  #sentence = fixit(sentence)
-  accepted << sentence  if sentence.size > 15 && sentence.size <= 140 
-  rejected << sentence  if sentence.size > 140
+  sentence = fixit(sentence)
+  accepted << sentence  if sentence.size > 15 && sentence.size <= 99  && !sentence.include?("{") && !sentence.include?(";") && !sentence.include?("}") && !sentence.match(/\d/) && !sentence.match(/George|Edward|Anne|William|Victoria|Charles|Henry/)
+  #rejected << sentence  if sentence.size > 140
 end
 
 puts "Accepted: #{accepted.size}"
@@ -47,18 +44,17 @@ puts "Rejected: #{rejected.size}"
 # Of the rejected setences split again on question marks. See if any of these
 # newly split setences are tweet-sized and reject the rest.
 
-more_rejects = []
-rejected.each do |reject|
-  reject.split('?').map{|s| s.strip }.select{ |s| s.size > 0 }.each do |sentence|
-    sentence += '?'  unless sentence[-1] == '.'
-    sentence = fixit(sentence)
-    accepted << sentence  if sentence.size > 15 && sentence.size <= 140
-    more_rejects << sentence  if sentence.size > 140
-  end
-end
-
-rejected = more_rejects
-puts "here"
+#more_rejects = []
+#rejected.each do |reject|
+#  reject.split('?').map{|s| s.strip }.select{ |s| s.size > 0 }.each do |sentence|
+#    sentence += '?'  unless sentence[-1] == '.'
+#    #sentence = fixit(sentence)
+#    accepted << sentence  if sentence.size > 15 && sentence.size <= 140 
+#    more_rejects << sentence  if sentence.size > 140
+#  end
+#end
+#
+#rejected = more_rejects
 #DB = Sequel.connect("mysql2://#{DB_USER}:#{DB_PASSWORD}@localhost/stungeye")
 #sentences = DB[:sentences]
 
@@ -74,12 +70,12 @@ puts "ACCEPTED:\n"
    #sentences.insert( :words => sentence, :length => sentence.size )
  end
 
-puts "\nREJECTED:\n"
- rejected.each do |sentence|
-   puts sentence
-   #sentences.insert( :words => sentence, :length => sentence.size )
- end
-
-puts "Accepted: #{accepted.size}"
-puts "Rejected: #{rejected.size}"
+#puts "\nREJECTED:\n"
+# rejected.each do |sentence|
+#   puts sentence
+#   #sentences.insert( :words => sentence, :length => sentence.size )
+# end
+#
+#puts "Accepted: #{accepted.size}"
+#puts "Rejected: #{rejected.size}"
 

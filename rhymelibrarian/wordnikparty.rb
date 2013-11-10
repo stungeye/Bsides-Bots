@@ -27,6 +27,6 @@ class WordnikParty
       'useCanonical' => 'false'
     }
     rhymes = q("/#{word}/relatedWords", options)
-    rhymes.nil? || rhymes.size.zero? ? [] : rhymes[0]['words']
+    rhymes.nil? || rhymes.size.zero? || rhymes.is_a?(Hash) ? [] : rhymes[0]['words']
   end
 end
